@@ -1,0 +1,53 @@
+#import turtle
+#turtle.setup(650,350,200,200)
+#turtle.penup()
+#turtle.fd(-250)
+#turtle.pendown()
+#turtle.pensize(25)
+#turtle.pencolor("purple")
+##turtle.seth(-40)
+##for i in range(4):
+##    turtle.circle(40,80)
+##    turtle.circle(-40,80)
+##turtle.circle(40,80/2)
+##turtle.fd(40)
+##turtle.circle(16,180)
+##turtle.fd(40*2/3)
+##turtle.done()
+
+##draw first circle
+#turtle.penup()
+#turtle.goto(0,-200)
+#turtle.pendown()
+#turtle.circle(200)
+##draw second circle
+#turtle.penup()
+#turtle.goto(0,-150)
+#turtle.pendown()
+#turtle.circle(150)
+##draw third circle
+#turtle.penup()
+#turtle.goto(0,-100)
+#turtle.pendown()
+#turtle.circle(100)
+##draw fourth circle
+#turtle.penup()
+#turtle.goto(0,-50)
+#turtle.pendown()
+#turtle.circle(50)
+import turtle
+turtle.setup(650, 350, 200, 200)
+turtle.penup()
+turtle.fd(-250)
+turtle.pendown()
+turtle.pensize(25)
+turtle.pencolor("purple")
+turtle.seth(-40)
+for i in range(4):
+    turtle.circle(40, 80)
+    turtle.circle(-40, 80)
+turtle.circle(40, 80/2)
+turtle.fd(40)
+turtle.circle(16, 180)
+turtle.fd(40 * 2/3)
+turtle.done()
