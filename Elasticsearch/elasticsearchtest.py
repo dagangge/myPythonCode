@@ -3,7 +3,8 @@ from tqdm import tqdm
 
 # es=Elasticsearch({"host":"localhost","port":"9200"})
 ESSERVERS=[{
-    "host":"localhost",
+    # "host":"localhost",
+    "host":"172.16.12.122",
     "port":9200
 }]
 es = Elasticsearch(hosts=ESSERVERS)
@@ -24,7 +25,7 @@ def createIndex(my_index):
             }
         }
     }
-    es.indices.create(index=my_index,ignore=400, body=settings)
+    es.indices.create(index=my_index,ignore=400,body=settings)
     print("创建索引%s成功！" %(my_index))
 
 
@@ -124,9 +125,9 @@ def keywordSearch(keywords,myindex):
 
 if __name__ == "__main__":
     my_index = "news"
-    # createIndex(my_index)
-    # deleteIndex(my_index)
-    # words=getAllWords()
-    # insertData(words,my_index,onebulk=100)
-    keywords="刘备张飞"
-    keywordSearch(keywords,my_index)
+    deleteIndex(my_index)
+    createIndex(my_index)    
+    words=getAllWords()
+    insertData(words,my_index,onebulk=100)
+    # keywords="刘备张飞"
+    # keywordSearch(keywords,my_index)

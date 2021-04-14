@@ -65,21 +65,14 @@ def createIndex(my_index, df: pd.DataFrame):
             }
 
         body = {
-            "settings": {
-                "index": {
-                    "number_of_shards": 5,  # 是数据分片数，默认为5，有时候设置为3
-                    "number_of_replicas": 1,  # 是数据备份数，如果只有一台机器，设置为0
-                }
-            },
-            "mappings": {
-                "properties": props,
-            },
+            "properties": props,
         }
         # es.indices.create(index=my_index, ignore=400, body=body)
-        es.indices.create(index=my_index, body=body)
-        print("创建索引%s成功！" % (my_index))
+        # es.indices.create(index=my_index, body=body)
+        es.indices.put_mapping(index=my_index, body=body)
+        print("修改索引%s成功！" % (my_index))
     except Exception as e:
-        print(f"创建索引${my_index}失败！${e}")
+        print(f"修改索引${my_index}失败！${e}")
 
 
 def deleteIndex(my_index):
@@ -97,20 +90,20 @@ if __name__ == "__main__":
         # gk_st_config
         # gk_st_data
         # if df == "gk_st_config" or df =="gk_st_data":
-        # if df == "gk_st_config":
-        if (
-            df == "gk_ps_config"
-            or df == "gk_ps_data"
-            or df == "gk_eo_config"
-            or df == "gk_eo_data"
-            or df == "gk_fs_config"
-            or df == "gk_fs_data"
-            or df == "gk_sa_config"
-            or df == "gk_sa_data"
-            or df == "gk_ws_config"
-            or df == "gk_ws_data"
-            or df == "gk_st_config"
-            or df == "gk_st_data"
-        ):
-            deleteIndex(df)
+        if df == "gk_st_config":
+        # if (
+        #     df == "gk_ps_config"
+        #     or df == "gk_ps_data"
+        #     or df == "gk_eo_config"
+        #     or df == "gk_eo_data"
+        #     or df == "gk_fs_config"
+        #     or df == "gk_fs_data"
+        #     or df == "gk_sa_config"
+        #     or df == "gk_sa_data"
+        #     or df == "gk_ws_config"
+        #     or df == "gk_ws_data"
+        #     or df == "gk_st_config"
+        #     or df == "gk_st_data"
+        # ):
+            # deleteIndex(df)
             createIndex(df, elasticindex[df])

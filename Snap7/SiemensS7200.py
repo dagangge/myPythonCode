@@ -8,26 +8,29 @@ import datetime
 # s7-300	    0	2
 # s7-400/WIN AC	见硬件组态	见硬件组态
 # s7-1200/1500	0	0/1
-def plc_connect(ip, rack=0, slot=0):
-    client = snap7.client.Client()
-    client.connect(ip, rack, slot)
+def plc_connect(ip):
+    client = snap7.logo.Logo()
+    # client.connect(ip,tsap_snap7=0x1000,tsap_logo=0x1102)
+    # client.connect(ip,tsap_snap7=0x1000,tsap_logo=0x1002)
+    client.connect(ip,tsap_snap7=0x1000,tsap_logo=0x1002)
     return client
 
 
-def plc_con_close(client):
+def plc_con_close(client:snap7.logo.Logo):
     client.disconnect()
+    client.destroy()
 
 
-def test_mk10_1(client):
+def test_mk10_1(client:snap7.logo.Logo):
     area = snap7.types.S7AreaDB
-    dbnumber = 9
-    start = 136
-    start = 204
-    amount = 8
+    dbnumber = 1
+    start = 250
+    amount = 20
     print(u'初始值')
-    mk_data = client.read_area(area, dbnumber, start, amount)
+    mk_data = client.read("V250")
+    print(mk_data)
+    mk_data = client.db_read(1,250,20)
     listdate=list(mk_data)
-    # print(struct.unpack('!c', mk_data))
     print(listdate)
     # print(u'置1')
     # client.write_area(area, dbnumber, start, 10)
@@ -36,7 +39,7 @@ def test_mk10_1(client):
     # print(struct.unpack('!c', mk_cur))
 
 
-def test_mk_w201(client):
+def test_mk_w201(client:snap7.logo.Logo):
     area = snap7.types.areas.MK
     dbnumber = 0
     amount = 2
